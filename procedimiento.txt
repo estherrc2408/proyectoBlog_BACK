@@ -1,0 +1,24 @@
+npm init -y
+
+pm i express mongoose cors dotenv nodemon
+//o npm i nodemon -d
+
+Introducir "start":"node app.js","dev":"nodemon app"    en scripts dentro de package.json 
+
+Create app.js and connect with port 3000:
+    //requires
+    const express = require('express') //require module to connect server code
+
+    //vars
+    const app = express();
+    const port = process.env.PORT || 3000 
+
+    //listener
+    app.listen(port, () => {
+    console.log(`servidor a la escucha del puerto ${port}`);
+    })
+
+Crear el archivo .env e introduce dentro las variables de entorno: PORT=3000
+
+Conectamos a mongoAtlas.
+    Connect your application -> DRIVER: Node.js     VERSION: 4.0 or later
