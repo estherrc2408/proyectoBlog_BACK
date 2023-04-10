@@ -2,22 +2,26 @@ const {Schema,model } = require("mongoose");
 const mongoosePaginate = require('mongoose-paginate');
 
 const ArticleSchema=new Schema({
+    
     title: {
         type:String,
         required:true
     },
+    extract:{
+        type:String,
+    },
+    // image:{
+        
+    // }
     description: {
         type:String,
         required:true
-    }
-    // genero:{
-    //     type:String,
-    //     required:true,
-    // },
-    // fecha:{
-    //     type:Date,
-    //     default:Date.now
-    // }
+    },
+    author:{
+        type:String,
+        default:'anonymous'
+    },
+
 })
 
 ArticleSchema.plugin(mongoosePaginate)

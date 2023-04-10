@@ -34,7 +34,6 @@ const getArticles = async (req, res) => {
 const getArticle = async (req, res)=>{
 
     const id=req.params.id
-    console.log(req.params)
 
     try{
 
@@ -62,34 +61,34 @@ const getArticle = async (req, res)=>{
 
 }
 
-// const getSearchedArticles =async (req,res)=>{
-   
-//     //  console.log(req.params) // {search:___}
-//     const userSearch = req.params.search;
-//     console.log(userSearch);
-//     try{
-//         const data = await Article.find({title:userSearch})
+const getSearchedArticles =async (req,res)=>{
 
-//         if(!data){
-//             return res.status(404).json({
-//                 ok:false,
-//                 msg:'title not found'
-//             })
-//         }else{
-//             return  res.status(200).json({
-//                 ok:true,
-//                 msg:'article found',
-//                 data
-//             })
-//         }
+    const userSearch = new RegExp(`${req.params.search}`,'i');
+    console.log(userSearch);
 
-//     }catch(error){
-//         return res.status(500).json({
-//             ok:false,
-//             msg:'server error'
-//         })
-//     }
-// }
+    try{
+        const data = await Article.find({$or:[{title:userSearch},{description:userSearch}] })
+
+        if(!data){
+            return res.status(404).json({
+                ok:false,
+                msg:'search not found'
+            })
+        }else{
+            return  res.status(200).json({
+                ok:true,
+                msg:'article found',
+                data
+            })
+        }
+
+    }catch(error){
+        return res.status(500).json({
+            ok:false,
+            msg:'server error'
+        })
+    }
+}
 
 
 const postArticle = async (req, res)=>{
@@ -173,6 +172,7 @@ const deleteArticle = async(req,res)=>{
 module.exports = {
     getArticles,
     getArticle,
+    getSearchedArticles,
     postArticle,
     putArticle,
     deleteArticle

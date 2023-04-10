@@ -6,6 +6,7 @@ router.get('/', getArticles);      //* GET
 router.get('/:id', getArticle);
 router.get('/search/:search', getSearchedArticles)//query=lo que haya despues de la interrogacion
 
+
 router.post('/', postArticle);
 
 router.put('/:id', putArticle);
